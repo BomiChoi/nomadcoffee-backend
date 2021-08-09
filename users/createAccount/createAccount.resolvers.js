@@ -38,11 +38,9 @@ export default {
                         githubUsername,
                     },
                 });
-                // console.log(newUser);
                 return { ok: true }
             } catch (e) {
-                // console.log(e);
-                return { ok: false, error: e.message };
+                return { ok: false, error: "Could not create account." };
             }
         },
     },

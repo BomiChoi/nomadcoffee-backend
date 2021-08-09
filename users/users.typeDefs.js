@@ -1,4 +1,4 @@
-import { gql } from "apollo-server";
+import { gql } from "apollo-server-express";
 
 export default gql`
     type User{
@@ -8,9 +8,15 @@ export default gql`
         name: String!
         location: String!
         password: String!
-        avatarURL: String!
+        avatarURL: String
         githubUsername: String!
         createdAt: String!
         updatedAt: String!
+        following: [User]
+        followers: [User]
+        totalFollowing: Int!
+        totalFollowers: Int!
+        isMe: Boolean!
+        isFollowing: Boolean!
     }
 `;
