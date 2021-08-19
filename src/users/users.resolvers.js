@@ -62,5 +62,15 @@ export default {
             });
             return exists.length !== 0;
         },
+        shops: async ({ username }, { lastId }) => {
+            const shops = await client.user
+                .findUnique({ where: { username } })
+                .shops({
+                    take: 5,
+                    skip: lastId ? 1 : 0,
+                    ...(lastId && { cursor: { id: lastId } }),
+                });
+            return shops;
+        },
     },
 };
