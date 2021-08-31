@@ -2,6 +2,6 @@ import { gql } from "apollo-server-express";
 
 export default gql`
     type Mutation {
-        followUser(username: String!): MutationResponse!
+        uploadPhoto(file: Upload!, shopId: Int!) : MutationResponse!
     }
 `;
