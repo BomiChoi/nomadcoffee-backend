@@ -6,14 +6,15 @@ export default {
     Mutation: {
         uploadPhoto: protectedResolver(
             async (_, { file, shopId }, { loggedInUser }) => {
-                const shop = client.coffeeShop.findUnique({
+                const shop = await client.coffeeShop.findUnique({
                     where: {
-                        id,
+                        id: shopId,
                     },
                     select: {
-                        userId,
+                        userId: true,
                     },
                 });
+                console.log(shop.userId, loggedInUser.id);
                 if (!shop) {
                     return {
                         ok: false,

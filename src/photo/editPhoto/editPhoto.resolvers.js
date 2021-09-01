@@ -5,7 +5,7 @@ import { uploadToS3 } from "../../shared/shared.utils";
 export default {
     Mutation: {
         editPhoto: protectedResolver(
-            async (_, { id }, { loggedInUser }) => {
+            async (_, { file, id }, { loggedInUser }) => {
                 const oldPhoto = await client.coffeeShopPhoto.findUnique({
                     where: {
                         id,
@@ -13,7 +13,7 @@ export default {
                     select: {
                         shop: {
                             select: {
-                                userId,
+                                userId: true,
                             }
                         }
                     }
@@ -23,14 +23,14 @@ export default {
                         ok: false,
                         error: "Photo not found."
                     };
-                } else if (photo.shop.userId !== loggedInUser.id) {
+                } else if (oldPhoto.shop.userId !== loggedInUser.id) {
                     return {
                         ok: false,
                         error: "Not authorized.",
                     };
                 } else {
                     const fileUrl = await uploadToS3(file, loggedInUser.id, "uploads");
-                    await client.photo.update({
+                    await client.coffeeShopPhoto.update({
                         where: { id },
                         data: {
                             url: fileUrl,
