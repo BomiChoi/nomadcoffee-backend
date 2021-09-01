@@ -12,7 +12,7 @@ export default {
                     select: {
                         shop: {
                             select: {
-                                userId,
+                                userId: true,
                             }
                         }
                     }

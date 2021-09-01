@@ -14,7 +14,6 @@ export default {
                         userId: true,
                     },
                 });
-                console.log(shop.userId, loggedInUser.id);
                 if (!shop) {
                     return {
                         ok: false,
