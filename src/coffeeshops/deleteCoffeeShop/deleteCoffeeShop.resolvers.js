@@ -9,13 +9,18 @@ export default {
                 { id },
                 { loggedInUser }
             ) => {
-                const deletedShop = await client.coffeeShop.delete({
+                const shop = await client.coffeeShop.findFirst({
                     where: {
                         id,
                         userId: loggedInUser.id
                     },
                 });
-                if (deletedShop) {
+                if (shop) {
+                    await client.coffeeShop.delete({
+                        where: {
+                            id
+                        },
+                    });
                     return {
                         ok: true
                     };
