@@ -12,6 +12,13 @@ export default {
                 },
             },
         }),
+        photos: ({ id }) => client.coffeeShopPhoto.findMany({
+            where: {
+                shop: {
+                    id
+                },
+            },
+        }),
     },
     Category: {
         shops: ({ id }, { lastId }) => {
