@@ -12,12 +12,12 @@ export default gql`
         githubUsername: String!
         createdAt: String!
         updatedAt: String!
-        following(lastId: Int): [User]
-        followers(lastId: Int): [User]
+        following(offset: Int): [User]
+        followers(offset: Int): [User]
         totalFollowing: Int!
         totalFollowers: Int!
         isMe: Boolean!
         isFollowing: Boolean!
-        shops(lastId: Int): [CoffeeShop]
+        shops(offset: Int): [CoffeeShop]
     }
 `;

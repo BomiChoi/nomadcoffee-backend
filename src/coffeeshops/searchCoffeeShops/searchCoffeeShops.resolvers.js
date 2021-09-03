@@ -2,16 +2,16 @@ import client from "../../client";
 
 export default {
     Query: {
-        searchUsers: async (_, { keyword, offset }) => {
-            const result = client.user.findMany({
+        searchCoffeeShops: async (_, { keyword, offset }) => {
+            const result = client.coffeeShop.findMany({
                 where: {
-                    username: {
-                        startsWith: keyword.toLowerCase(),
+                    name: {
+                        startsWith: keyword,
                     },
                 },
                 take: 5,
                 skip: offset ? offset : 0,
-            });
+            })
             return result;
         },
     },

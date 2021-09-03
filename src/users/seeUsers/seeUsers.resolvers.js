@@ -2,12 +2,12 @@ import client from "../../client";
 
 export default {
     Query: {
-        seeCategories: async (_, { offset }) => {
-            const categories = await client.category.findMany({
+        seeUsers: async (_, { offset }) => {
+            const result = client.user.findMany({
                 take: 5,
                 skip: offset ? offset : 0,
             });
-            return categories;
+            return result;
         },
     },
 };

@@ -2,23 +2,21 @@ import client from "../client";
 
 export default {
     User: {
-        following: async ({ username }, { lastId }) => {
+        following: async ({ username }, { offset }) => {
             const following = await client.user
                 .findUnique({ where: { username } })
                 .following({
                     take: 5,
-                    skip: lastId ? 1 : 0,
-                    ...(lastId && { cursor: { id: lastId } }),
+                    skip: offset ? offset : 0,
                 });
             return following;
         },
-        followers: async ({ username }, { lastId }) => {
+        followers: async ({ username }, { offset }) => {
             const followers = await client.user
                 .findUnique({ where: { username } })
                 .followers({
                     take: 5,
-                    skip: lastId ? 1 : 0,
-                    ...(lastId && { cursor: { id: lastId } }),
+                    skip: offset ? offset : 0,
                 });
             return followers;
         },
@@ -62,13 +60,12 @@ export default {
             });
             return exists.length !== 0;
         },
-        shops: async ({ username }, { lastId }) => {
+        shops: async ({ username }, { offset }) => {
             const shops = await client.user
                 .findUnique({ where: { username } })
                 .shops({
                     take: 5,
-                    skip: lastId ? 1 : 0,
-                    ...(lastId && { cursor: { id: lastId } }),
+                    skip: offset ? offset : 0,
                 });
             return shops;
         },

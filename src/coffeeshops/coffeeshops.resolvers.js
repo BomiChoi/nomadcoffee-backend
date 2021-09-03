@@ -21,13 +21,12 @@ export default {
         }),
     },
     Category: {
-        shops: ({ id }, { lastId }) => {
+        shops: ({ id }, { offset }) => {
             return client.category.findUnique({
                 where: { id },
             }).shops({
                 take: 5,
-                skip: lastId ? 1 : 0,
-                ...(lastId && { cursor: { id: lastId } }),
+                skip: offset ? offset : 0,
             });
         },
         totalShops: ({ id }) => client.coffeeShop.count({

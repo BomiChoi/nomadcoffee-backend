@@ -19,7 +19,7 @@ export default gql`
         id:     Int!
         name:   String!
         slug:   String
-        shops(lastId: Int): [CoffeeShop]
+        shops(offset: Int): [CoffeeShop]
         totalShops: Int!
     }
 `;
